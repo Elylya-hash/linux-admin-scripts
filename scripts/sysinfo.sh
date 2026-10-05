@@ -12,8 +12,11 @@ section() { printf '\n%s== %s ==%s\n' "$C_GREEN" "$1" "$C_RESET"; }
 section "Система"
 # Подписи полей — латиницей: printf выравнивает по байтам, и в локали C
 # (например, под cron) кириллица ломает колонки.
-# shellcheck disable=SC1091 # файл существует не на всех системах
-os=$(. /etc/os-release 2>/dev/null && echo "${PRETTY_NAME:-}" || true)
+os=''
+if [[ -r /etc/os-release ]]; then
+    # shellcheck disable=SC1091 # файл существует не на всех системах
+    os=$(. /etc/os-release && echo "${PRETTY_NAME:-}")
+fi
 printf '%-14s %s\n' "Host:" "$(hostname -f 2>/dev/null || hostname)"
 printf '%-14s %s\n' "OS:" "${os:-неизвестно}"
 printf '%-14s %s\n' "Kernel:" "$(uname -r)"

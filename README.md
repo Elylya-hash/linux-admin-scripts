@@ -116,7 +116,7 @@ make test   # дымовые тесты, root не нужен
 ```
 
 Требования: Bash 4.4+, coreutils, util-linux (`flock`), для части скриптов — systemd.
-Проверено на Ubuntu 24.04 (Bash 5.2); CI запускается на `ubuntu-latest`.
+Проверено на Ubuntu 24.04 (Bash 5.2); CI запускается на Ubuntu 24.04.
 
 ## Лицензия
 
