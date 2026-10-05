@@ -97,6 +97,14 @@ expect_rc 2 "без сервисов — ошибка использования
 echo "sysinfo.sh"
 expect_rc 0 "отрабатывает без ошибок" bash "$scripts/sysinfo.sh"
 
+echo "make install"
+expect_rc 0 "установка в отдельный префикс" make -C "$root" install PREFIX="$work/prefix"
+check "команда доступна под тем же именем, что в README" test -L "$work/prefix/bin/backup.sh"
+expect_rc 0 "скрипт находит lib.sh при запуске через симлинк" "$work/prefix/bin/sysinfo.sh"
+expect_rc 0 "справка через симлинк" "$work/prefix/bin/backup.sh" --help
+expect_rc 0 "удаление" make -C "$root" uninstall PREFIX="$work/prefix"
+check "после удаления симлинков нет" test ! -e "$work/prefix/bin/backup.sh"
+
 echo
 echo "Пройдено: $passed, провалено: $failed"
 [[ $failed -eq 0 ]]

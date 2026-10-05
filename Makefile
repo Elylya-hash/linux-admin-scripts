@@ -18,9 +18,9 @@ install: ## Установка в $(PREFIX)/lib/linux-admin-scripts и симл�
 	for f in scripts/*.sh; do \
 		name=$$(basename $$f .sh); \
 		[ "$$name" = lib ] && continue; \
-		ln -sf $(PREFIX)/lib/linux-admin-scripts/$$name.sh $(PREFIX)/bin/$$name; \
+		ln -sf $(PREFIX)/lib/linux-admin-scripts/$$name.sh $(PREFIX)/bin/$$name.sh; \
 	done
 
-uninstall:
-	for f in scripts/*.sh; do rm -f $(PREFIX)/bin/$$(basename $$f .sh); done
+uninstall: ## Удалить установленные файлы
+	for f in scripts/*.sh; do rm -f $(PREFIX)/bin/$$(basename $$f); done
 	rm -rf $(PREFIX)/lib/linux-admin-scripts

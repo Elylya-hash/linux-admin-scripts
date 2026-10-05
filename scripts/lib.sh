@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # lib.sh — общие функции для скриптов набора.
-# Подключается через: source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
+# Подключается через: source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/lib.sh"
 
 # Защита от повторного подключения
 [[ -n "${_LIB_SH_LOADED:-}" ]] && return 0

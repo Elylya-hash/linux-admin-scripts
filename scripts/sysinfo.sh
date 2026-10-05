@@ -5,7 +5,8 @@
 set -euo pipefail
 
 # shellcheck source=scripts/lib.sh
-source "$(dirname "${BASH_SOURCE[0]}")/lib.sh"
+# readlink -f: скрипт может быть запущен через симлинк из /usr/local/bin
+source "$(dirname "$(readlink -f "${BASH_SOURCE[0]}")")/lib.sh"
 
 section() { printf '\n%s== %s ==%s\n' "$C_GREEN" "$1" "$C_RESET"; }
 
